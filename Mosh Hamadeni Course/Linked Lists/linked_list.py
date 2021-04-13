@@ -9,7 +9,6 @@ class LinkedList():
   last = None
   length = 0
 
-
   def add_last(self, item):
     self.node = self.Node(item)
     self.length += 1
@@ -28,8 +27,8 @@ class LinkedList():
       self.first = self.last = self.node
     else:
       self.node.next_node = self.first
-      self.first = self.node
-  
+      self.first = self.node     
+    
   def _is_empty(self):
     return self.first == None
 
@@ -50,26 +49,30 @@ class LinkedList():
   def remove_first(self):
     if self._is_empty():
       raise Exception('Linked list is Empty')
+
     elif self.first == self.last:
       self.first = self.last = None
-      self.length -= 1
+    
     else:
       self.second = self.first.next_node
       self.first.next_node = None
       self.first = self.second
-      self.length -= 1
+
+    self.length -= 1
 
   def remove_last(self):
     if self._is_empty():
       raise Exception('Linked-List is Empty.')
+
     elif self.first == self.last:
       self.first = self.last = None
-      self.length -= 1
+      
     else:
       self.pervious = self._get_previous(self.last)
       self.last = self.pervious
       self.last.next_node = None
-      self.length -= 1
+    
+    self.length -= 1
 
   def _get_previous(self, node):
     self.current = self.first
@@ -79,6 +82,15 @@ class LinkedList():
       else:
         self.current = self.current.next_node
     
+  def to_array(self):
+    self.array = []
+    self.current = self.first
+
+    while self.current != None:
+      self.array.append(self.current.value)
+      self.current = self.current.next_node
+    
+    return self.array
 
     
 
@@ -86,15 +98,16 @@ class LinkedList():
 linked_list = LinkedList()
 linked_list.add_last(10)
 linked_list.add_last(20)
-linked_list.add_last(30)
-# linked_list.add_first(50)
+# linked_list.add_last(30)
+linked_list.add_first(5)
 # linked_list.remove_first()
-linked_list.remove_last()
+# linked_list.remove_last()
 
 print(linked_list.first.value)
 # print(linked_list.first.next_node.value)
 print(linked_list.last.value)
 # print(linked_list.last.next_node)
 print(linked_list.length)
+print(linked_list.to_array())
 # print(linked_list.index_of(100))
 # print(linked_list.contains(100))

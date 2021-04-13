@@ -1,0 +1,18 @@
+One of the common interview questions is the difference between arrays and linked lists. We should be able to explain the difference in terms of required memory and time complexity of various operations.
+
+Arrays, or more accuretly static arrays have a fixed size. So if we don't know afread of time, how many items we're going to store in them, we should use dynamic arrays. Dynamic arrays grow by 50 or 100% of their size when they get full. Liked lists on the other hand take only as much memory as they really need, nothing more. Having said that, linked lists take a bit more memory because each node should store the address of the next node in addition to a value. So if you know roughly ahead of time how many items you're going to store, you better use arrays, either static or dynamic, because arrays have a smaller footprint.
+
+For example, let's say you're going to store up to 100 items, but you're not sure how many items exactly. In that case, you may use a dynamic array with an initial capacity of 100. In Java, we can set the initial capacity when creating an array object.
+
+So these are the differences in terms of space, but space is not everything, you should also optimise for performence, as you know certain operations are fast in arrays, but slow in linked lists.
+
+So, as I always emphasize, you need to understand what problem you're trying to solve. Every problem has different solutions, and each solution has certain strenghts and weaknesses, there is no such think as the perfect solution. We should always do tradeoffs, and that's exactly what a good interviewer looks for. They want to see if you really understand a problem, you can think of different solutions, explain the pros and cons of each and pick the one that best works for a given scenario.
+
+Now let's compare theses data structures in term of their runtime complexity:
+- Arrays shine when you need to look up an item by index, in linked lists, you have to traverse until you find the item in the given index. 
+- Looking up an item by its value is an O(n) in both these data structures because we have to iterate over all the items until we find the target.
+- Inserting items in an array is an O(n), because an array gets full, we have to resize it and copy all of the existing items into the new array. Now that's not a big deal in an array of 100 items, but if you're dealing with an array of 1 million items, this is certainly a big issue.
+Again, there is no such thing as one size fits all.You need to understand the problem you are trying to solve.
+- Inserting an item in a linked list can either be an O(1) or an O(n), depending of where we want to add this new item. Adding at the beginning or at the end is super fast, because we simply have to change the links. But adding at a given index includes a look of by index which is an O(n).
+- And finally, deleting items in a array is an O(n) operation because we need to shift the items to the left to fill the whole. With linked lists, if you want to delete an item from the beginning we simply change the links. But if you want to remove it from the middle of the end, you have to traverse the list to find the previous node.
+

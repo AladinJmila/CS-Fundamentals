@@ -47,17 +47,43 @@ class LinkedList():
   def contains(self, item):
     return self.index_of(item) != -1
 
+  def remove_first(self):
+    if self.is_empty():
+      raise Exception('Linked list is Empty')
+    elif self.first == self.last:
+      self.first = self.last = None
+      self.length -= 1
+    else:
+      self.second = self.first.next_node
+      self.first.next_node = None
+      self.first = self.second
+      self.length -= 1
+
+
+
+
+
+
+    if self.first and self.first.next_node:
+      self.second = self.first.next_node
+      self.first.next_node = None
+      self.first = self.second
+      self.length -= 1
+
+
+
 
 linked_list = LinkedList()
 linked_list.add_last(10)
 linked_list.add_last(20)
-linked_list.add_last(30)
-linked_list.add_first(50)
+# linked_list.add_last(30)
+# linked_list.add_first(50)
+linked_list.remove_first()
 
-# print(linked_list.first.value)
+print(linked_list.first.value)
 # print(linked_list.first.next_node.value)
 # print(linked_list.last.value)
 # print(linked_list.last.next_node)
-# print(linked_list.length)
+print(linked_list.length)
 # print(linked_list.index_of(100))
-print(linked_list.contains(100))
+# print(linked_list.contains(100))

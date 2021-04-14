@@ -1,46 +1,47 @@
 class LinkedList():
-
+  '''Creates a Linked List Object'''
   class Node():
-    next_node = None
+    
     def __init__(self, value):
       self.value = value
+      self.next = None
 
   first = None
   last = None
   length = 0
 
-  def add_last(self, item):
-    self.node = self.Node(item)
-    self.length += 1
-
-    if self._is_empty():
-      self.first = self.last = self.node
-    else:
-      self.last.next_node = self.node
-      self.last = self.node
-
-  def add_first(self, item):
-    self.node = self.Node(item)
-    self.length += 1
-
-    if self._is_empty():
-      self.first = self.last = self.node
-    else:
-      self.node.next_node = self.first
-      self.first = self.node     
-    
   def _is_empty(self):
     return self.first == None
 
+  def add_last(self, item):
+    node = self.Node(item)
+    self.length += 1
+
+    if self._is_empty():
+      self.first = self.last = node
+    else:
+      self.last.next = node
+      self.last = node
+
+  def add_first(self, item):
+    node = self.Node(item)
+    self.length += 1
+
+    if self._is_empty():
+      self.first = self.last = node
+    else:
+      node.next = self.first
+      self.first = node     
+    
   def index_of(self, item):
-    self.index = 0
-    self.current = self.first
-    while self.current != None:
-      if self.current.value == item:
-        return self.index
+    index = 0
+    current = self.first
+    while current != None:
+      if current.value == item:
+        return index
       else:
-        self.current = self.current.next_node
-        self.index += 1
+        current = current.next
+        index += 1
     else: return -1
     
   def contains(self, item):
@@ -54,9 +55,9 @@ class LinkedList():
       self.first = self.last = None
     
     else:
-      self.second = self.first.next_node
-      self.first.next_node = None
-      self.first = self.second
+      second = self.first.next
+      self.first.next = None
+      self.first = second
 
     self.length -= 1
 
@@ -68,46 +69,64 @@ class LinkedList():
       self.first = self.last = None
       
     else:
-      self.pervious = self._get_previous(self.last)
-      self.last = self.pervious
-      self.last.next_node = None
+      previous = self._get_previous(self.last)
+      self.last = previous
+      self.last.next = None
     
     self.length -= 1
 
   def _get_previous(self, node):
-    self.current = self.first
-    while self.current != None:
-      if self.current.next_node == node:
-        return self.current
+    current = self.first
+    while current != None:
+      if current.next == node:
+        return current
       else:
-        self.current = self.current.next_node
+        current = current.next
     
   def to_array(self):
-    self.array = []
-    self.current = self.first
+    array = []
+    current = self.first
 
-    while self.current != None:
-      self.array.append(self.current.value)
-      self.current = self.current.next_node
+    while current != None:
+      array.append(current.value)
+      current = current.next
     
-    return self.array
+    return array
 
-    
+  def reverse(self):
+    if self._is_empty():
+      return
+     
+    previous = self.first
+    current = self.first.next
+
+    while current != None:
+      temp = current.next
+      current.next = previous
+      previous = current
+      current = temp 
+
+    self.last = self.first
+    self.last.next = None
+    self.first = previous
+
 
 
 linked_list = LinkedList()
 linked_list.add_last(10)
 linked_list.add_last(20)
-# linked_list.add_last(30)
+linked_list.add_last(30)
 linked_list.add_first(5)
 # linked_list.remove_first()
 # linked_list.remove_last()
 
 print(linked_list.first.value)
-# print(linked_list.first.next_node.value)
+# print(linked_list.first.next.value)
 print(linked_list.last.value)
-# print(linked_list.last.next_node)
+# print(linked_list.last.next)
 print(linked_list.length)
+print(linked_list.to_array())
+linked_list.reverse()
 print(linked_list.to_array())
 # print(linked_list.index_of(100))
 # print(linked_list.contains(100))

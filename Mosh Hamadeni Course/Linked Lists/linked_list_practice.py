@@ -24,6 +24,7 @@ class LinkedList():
 
   def add_first(self, item):
     self.node = self.Node(item)
+    self.length += 1
 
     if self._is_empty():
       self.first = self.last = self.node

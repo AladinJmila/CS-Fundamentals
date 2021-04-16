@@ -1,0 +1,12 @@
+Stacks are powerful data structures that can help us solve many complex programming problems. We can use them to implement the undo feature in our applications, we can use them to build compilers, for example compilers use stacks for parsing the syntax of expressions. We can also use stacks to evaluate arithmetic expressions. 
+We can also use stacks to build navigation in our applications. For example, web browsers and android devices have forward and backward buttons, we can implement these buttons using stacks.
+
+Now let's look at the structure of stacks, the best way to understand stacks is to think of a stack of books, we can stack a bunch of books on top of each other, but we can only view of remove the top book. If you want to get to the bottom book, you have to remove all the books one by one. This is what we call last in first out or LIFO principal, and this is exactly the reason for implementing the undo feature or navigation in our applications. Imagine each object in a stack represents an action that the user performed in a text editor. So we have action 1, action 2, and action 3. Now to undo these actions you start with the last action, so the last action that was performed is the first one that can be undone, we can take this object out of our stack and call one of it's methods to undo the action.
+
+Now, internally we use an array or a linked list to store the objects in a stack, so a stack is basically a wrapper around an array or a linked list that gives a different way of storing and accessing objects.
+
+Now, let's look at various operations that stacks support and their runtime complexities.
+Stacks have four operations, 'push' which adds and item on the top of the stack, 'pop' which removes the item on the top, 'peek' which returns the item on the top without removing it, and 'isEmpty' which tells us that is empty or not. As you can see we don't have lookups because stacks are not really meant fo that. So we don't use stacks to store a list of products, customers and so on.
+
+Now in terms of runtime complexity, 'peek' and 'isEmpty' run in constant time or O(1). 'push' and 'pop' also run in O(1), because we can quickly insert or remove an item at the end of linked list. The same is true if we use an array to implement a stack. So all operations of stacks operate in O(1).
+

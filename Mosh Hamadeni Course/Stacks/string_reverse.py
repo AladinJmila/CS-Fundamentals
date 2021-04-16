@@ -1,6 +1,6 @@
 string = 'string to reverse'
-
 string_list = list(string)
+
 # Using reversed()
 rever1 = ''
 for i in reversed(string_list):

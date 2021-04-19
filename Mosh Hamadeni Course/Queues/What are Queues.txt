@@ -1,0 +1,18 @@
+A queue is a data structure similar to a stack, except the first item inserted is the first one that can be removed. This is what we call FIFO, first in first out. Stacks on the other hand are LIFO,last in first out.
+A queue in programming is like a line or a queue of people in real at the real world. People join the queue from the back and leave from the front. Queues are exactly the same.
+
+Now let's look at a few applications using queues:
+You can use queues in situations where you have a resource and this resource must be shared amongst many consumers. So these consumers must line up and use the resource one by one.
+Here are few examples: 
+- Printers use queues to manage jobs, it prints jobs in the order they are submitted.
+- Operating systems use queues the managa processes, so these processes wait in a queue for their turn to run.
+- Web servers also use queues to manage incoming requests, these requests go in a queue and are processed in the order they are recieved.
+- Another application of queues is building live support systems. For example, when you have a problem with your web host, you may jump on their site and use live support. Now there is someone sitting and waiting for peoples requests. He or she cannot service everyone at the same time, right? So you have to go in a queue.
+So there is a resource with many concumers, these consumers get access to the resource based on their position in a queue. These are all examples of using queues.
+
+Now, let's look at various operations that queues support and the runtime complexity:
+- We have enqueue for adding and item to the back of a queue.
+- Dequeue for removing an item from the front of a queue.
+- Peek for getting the item at the front without removing it.
+- As well as empty and full.
+Similar to stacks, all these operations run in constant time or O(1) because items are added or removed from the ends and this is very fast.

@@ -1,3 +1,4 @@
+
 # Reversing a queue using a stack.
 queue = [10, 20, 30]
 stack = []
@@ -10,7 +11,7 @@ def reverse_queue(queue):
 
 # print(reverse_queue(queue))
 
-# Creating a queue using a circular array.
+# Building a queue using a circular array.
 class ArrayQueue():
   def __init__(self, capacity):
     self.capacity = capacity
@@ -48,25 +49,38 @@ class ArrayQueue():
     while index > self.front and index < self.rear:
       return queue[index]
 
-test_queue = ArrayQueue(5)
-test_queue.enqueue(10)
-test_queue.enqueue(20)
-test_queue.enqueue(30)
-test_queue.dequeue()
-front = test_queue.dequeue()
-test_queue.enqueue(40)
-test_queue.enqueue(50)
-test_queue.enqueue(60)
-test_queue.enqueue(70)
-test_queue.dequeue()
-print(front)
-print(test_queue.queue)
-# print(test_queue.dequeue())
-# print(test_queue.dequeue())
-# print()
+# Building a queue using two stacks.
+class StacksQueue():
+  def __init__(self, capacity):
+    self.capacity = capacity
 
-# print(test_queue.count)
-# print(test_queue.rear)
-# print(test_queue.front)
+  stack1 = []
+  stack2 = []
+  count = 0
 
+  def enqueue(self, item):
+    if self.count == self.capacity: raise Exception('Queue is full.')
+
+    self.stack1.append(item)
+    self.count += 1
+
+  def dequeue(self):
+    if self.count == 0: raise Exception('Queue is empty.')
+
+    if not self.stack2:
+      while self.stack1:
+        self.stack2.append(self.stack1.pop())
+    item = self.stack2.pop()
+
+    self.count -= 1
+    return item
+
+
+
+
+
+    
+
+
+  
 

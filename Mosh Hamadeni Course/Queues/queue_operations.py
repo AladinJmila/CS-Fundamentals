@@ -75,7 +75,53 @@ class StacksQueue():
     self.count -= 1
     return item
 
+# Building a priority queue.
+class PriorityQueue():
+  def __init__(self, capacity):
+    self.capacity = capacity
+    self.queue = [0 for i in range(capacity)]
 
+  head = 0
+  rear = 0
+  count = 0
+
+
+  def enqueue(self, item):
+    if self.count == self.capacity: raise Exception('Queue is full.')
+  
+    if self.count == 0:
+      self.queue[0] = item
+    else:
+      for i in range(self.head , self.rear):
+        if item < self.queue[self.rear - i]:
+          print(self.rear - i)
+          print(self.queue[self.rear - i])
+          self.queue[self.rear + 1 - i] = self.queue[self.rear - i]
+        else:
+          print('inside else')
+          print(self.rear - 1 - i)
+          self.queue[self.rear - i] = self.queue[self.rear - 1 - i]
+          self.queue[self.rear - 1 - i] = item
+    self.rear = (self.rear + 1) % self.capacity
+    self.count += 1
+
+    def dequeue(self):
+      if self.count == 0: raise Exception('Queue is empty.')
+
+      item = self.queue[self.head]
+      self.queue[self.head] = 0
+      self.head = (self.head + 1) % self.capacity
+      self.count -= 1
+      
+      return item
+
+test_queue = PriorityQueue(5)
+test_queue.enqueue(3)
+test_queue.enqueue(2)
+test_queue.enqueue(7)
+# test_queue.enqueue(9)
+
+print(test_queue.queue)
 
 
 

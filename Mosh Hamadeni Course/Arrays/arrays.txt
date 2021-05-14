@@ -9,3 +9,7 @@ Now let's talk about removing an item. Here we have another couple scenarios, if
 Notes:
 
 - Alright we're going to solve this problem step by step, and this is the approach I want you to follow whenever you want to solve a complexe problem. Don't try to do too many things at once, try to break down that problem into smaller, easier to understand , easier to solve porblems. So in this video, we're going to focus on creating this array class and printing its content on the console. We're not going to worry about adding new items or removing existing items, we're going to implement these features in the following videos.
+
+- We should only use comments for explaining whys and hows, not what the code is doing, that is reflected in the code itself.
+
+- In case of an invalid input for our method. We don't want to print a message to the console, because this class might be used in an application with a graphical user interface. There we don't have a console, so instread we should throw and exception, because this is a programming error if this is an index out of range. So by throwing an exception, we force the program to crash, and with this the programmer knows they made a mistake, and they will solve this problem.

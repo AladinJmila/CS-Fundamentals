@@ -24,6 +24,20 @@ class Array:
     self.items[self.count] = item
     self.count += 1
 
+  def remove_at(self, index):
+    # Validate the index
+    if index < 0 or index >= self.count:
+      raise IndexError('Index out of range.')
+
+    # Shift the items to the left to fill the hole
+    # [10, 30, 40]
+    # index: 1
+    # 1 <- 2
+    # 2 <- 3
+    for i in range(index, self.count):
+      self.items[i] = self.items[i + 1] 
+
+    self.count -= 1
 
   def display(self):
     for i in range(self.count):
@@ -36,4 +50,5 @@ array.insert(10)
 array.insert(20)
 array.insert(30)
 array.insert(40)
+array.remove_at(0)
 array.display()

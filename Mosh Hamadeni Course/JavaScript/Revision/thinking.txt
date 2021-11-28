@@ -1,0 +1,99 @@
+right heavy / right skewed tree
+
+10
+  20
+    30
+leftRotate(10)
+
+root: {
+  value: 10;
+  leftChild: null,
+  rightChild: {
+    value: 20,
+    leftChild: null,
+    rightChild: {
+      value: 30,
+      leftChild: null,
+      rightChild: null
+    }
+  }
+  }
+
+  20
+10   30
+
+root: {
+  value: 20,
+  leftChild: {
+    value: 10,
+    leftChild: null,
+    rightChild: null
+  },
+  rightChild: {
+    value: 30,
+    leftChild: null,
+    rightChild: null
+  }
+}
+  
+
+10
+  30
+20
+the inbalance is in the right child left subtree
+rightRotate(30)
+
+root: {
+  value: 10,
+  height: 2
+  leftChild: null,
+  rightChild: {
+    value: 30,
+    height: 1,
+    leftChild: {
+      value: 20,
+      height: 0,
+      leftChild: null,
+      rightChild: null,
+    },
+    rightChild: null
+  }
+}
+
+root: {
+  value: 10,
+  height: 2
+  leftChild: null,
+  rightChild: {
+      value: 20,
+      height: 1,
+      leftChild: null,
+      rightChild: {
+        value: 30,
+        height: 0,
+        leftChild: null,
+        rightChild: null
+      },
+    },
+  }
+}
+
+
+root: {
+    value: 20,
+    height: 1,
+    leftChild: {
+      value: 10,
+      height: 0,
+      leftChild: null,
+      rightChild: null
+    },
+    rightChild: {
+      value: 30,
+      height: 0,
+      leftChild: null,
+      rightChild: null
+    },
+  },
+}
+

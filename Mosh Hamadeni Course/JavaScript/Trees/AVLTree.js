@@ -1,6 +1,6 @@
 class AVLTree {
   AVLNode = class {
-    height = null;
+    height = 0;
     value = null;
     leftChild = null;
     rightChild = null;

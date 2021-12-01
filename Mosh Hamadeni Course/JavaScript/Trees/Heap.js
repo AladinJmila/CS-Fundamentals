@@ -200,4 +200,4 @@ const getKthLargest = (array, k) => {
   return heap.max();
 };
 
-console.log(getKthLargest(numbers2, 6));
+// console.log(getKthLargest(numbers2, 6));

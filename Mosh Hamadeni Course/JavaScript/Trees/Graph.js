@@ -53,14 +53,54 @@ class Graph {
       this.adjacencyList[from].splice(index, 1);
     }
   };
+
+  traverseDepthFirstPub = root => {
+    const node = this.nodes[root];
+    if (!node) return;
+    this.traverseDepthFirstPri(node, new Set());
+  };
+
+  traverseDepthFirstPri = (root, visited) => {
+    console.log(root.label);
+    visited.add(root.label);
+
+    for (let neighbour of this.adjacencyList[root.label]) {
+      if (!visited.has(neighbour)) {
+        this.traverseDepthFirstPri(this.nodes[neighbour], visited);
+      }
+    }
+  };
+
+  traverseDepthFirstIter = label => {
+    if (!this.nodes[label]) return;
+
+    const visited = new Set();
+    const stack = [];
+    stack.push(label);
+
+    while (stack.length !== 0) {
+      let current = stack.pop();
+
+      if (visited.has(current)) continue;
+
+      console.log(current);
+      visited.add(current);
+
+      for (let neighbour of this.adjacencyList[current]) {
+        if (!visited.has(neighbour)) stack.push(neighbour);
+      }
+    }
+  };
 }
 
 const graph = new Graph();
 graph.addNode('A');
 graph.addNode('B');
 graph.addNode('C');
+graph.addNode('D');
 graph.addEdge('A', 'B');
+graph.addEdge('B', 'D');
+graph.addEdge('D', 'C');
 graph.addEdge('A', 'C');
-graph.removeNode('A');
-graph.addEdge('B', 'C');
-graph.print();
+graph.traverseDepthFirstIter('C');
+// graph.print();

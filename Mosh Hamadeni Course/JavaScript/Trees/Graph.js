@@ -129,16 +129,50 @@ class Graph {
     visited.add(node);
     stack.push(node);
   };
+
+  hasCyclePub = () => {
+    const all = new Set();
+    Object.keys(this.nodes).forEach(node => all.add(node));
+
+    const visiting = new Set();
+    const visited = new Set();
+
+    while (all.size) {
+      for (let node of [...all]) {
+        const result = this.hasCyclePri(node, all, visiting, visited);
+        if (result) return true;
+      }
+    }
+
+    return false;
+  };
+
+  hasCyclePri = (node, all, visiting, visited) => {
+    all.delete(node);
+    visiting.add(node);
+
+    for (let neighbour of this.adjacencyList[node]) {
+      if (visited.has(neighbour)) continue;
+
+      if (visiting.has(neighbour)) return true;
+
+      const result = this.hasCyclePri(neighbour, all, visiting, visited);
+      if (result) return true;
+    }
+
+    visiting.delete(node);
+    visited.add(node);
+
+    return false;
+  };
 }
 
 const graph = new Graph();
-graph.addNode('X');
 graph.addNode('A');
 graph.addNode('B');
-graph.addNode('P');
-graph.addEdge('X', 'A');
-graph.addEdge('X', 'B');
-graph.addEdge('A', 'P');
-graph.addEdge('B', 'P');
+graph.addNode('C');
+graph.addEdge('A', 'B');
+graph.addEdge('B', 'C');
+graph.addEdge('C', 'A');
 
-console.log(graph.topologicalSortPub('X'));
+console.log(graph.hasCyclePub());

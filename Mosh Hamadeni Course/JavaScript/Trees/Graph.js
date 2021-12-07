@@ -78,10 +78,10 @@ class Graph {
     const stack = [];
     stack.push(label);
 
-    while (stack.length !== 0) {
+    while (stack.length) {
       let current = stack.pop();
 
-      if (visited.has(current)) continue;
+      // if (visited.has(current)) continue;
 
       console.log(current);
       visited.add(current);
@@ -91,16 +91,54 @@ class Graph {
       }
     }
   };
+
+  traverseBreadthFirst = node => {
+    if (!this.nodes[node]) return;
+
+    const queue = [];
+    const visited = new Set();
+
+    queue.push(node);
+
+    while (queue.length) {
+      let current = queue.shift();
+
+      console.log(current);
+      visited.add(current);
+
+      for (let neighbour of this.adjacencyList[current]) {
+        if (!visited.has(neighbour)) queue.push(neighbour);
+      }
+    }
+  };
+
+  topologicalSortPub = node => {
+    if (!this.nodes[node]) return;
+    const stack = [];
+    this.topologicalSortPri(node, new Set(), stack);
+    return stack.reverse();
+  };
+
+  topologicalSortPri = (node, visited, stack) => {
+    for (let neighbour of this.adjacencyList[node]) {
+      if (!visited.has(neighbour)) {
+        this.topologicalSortPri(neighbour, visited, stack);
+      }
+    }
+
+    visited.add(node);
+    stack.push(node);
+  };
 }
 
 const graph = new Graph();
+graph.addNode('X');
 graph.addNode('A');
 graph.addNode('B');
-graph.addNode('C');
-graph.addNode('D');
-graph.addEdge('A', 'B');
-graph.addEdge('B', 'D');
-graph.addEdge('D', 'C');
-graph.addEdge('A', 'C');
-graph.traverseDepthFirstIter('C');
-// graph.print();
+graph.addNode('P');
+graph.addEdge('X', 'A');
+graph.addEdge('X', 'B');
+graph.addEdge('A', 'P');
+graph.addEdge('B', 'P');
+
+console.log(graph.topologicalSortPub('X'));

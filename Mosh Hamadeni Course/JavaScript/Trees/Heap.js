@@ -143,7 +143,10 @@ class PriorityQueueWithHeap {
   enqueue = item => heap.insert(item);
   dequeue = () => heap.remove();
   isEmpty = () => heap.isEmpty();
+  size = () => heap.size;
 }
+
+module.exports.PriorityQueue = PriorityQueueWithHeap;
 
 // const priorityQueue = new PriorityQueueWithHeap()
 

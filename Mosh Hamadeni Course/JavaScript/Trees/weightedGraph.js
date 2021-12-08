@@ -6,6 +6,19 @@ class Edge {
   }
 }
 
+_hasCycle = (node, parent, visited) => {
+  visited.add(node.label);
+
+  for (let edge of node.getEdges()) {
+    if (parent && edge.to.label === parent.label) continue;
+
+    if (visited.has(edge.to.label) || _hasCycle(edge.to, node, visited))
+      return true;
+  }
+
+  return false;
+};
+
 class WeigthedGraph {
   Node = class {
     constructor(label) {
@@ -45,6 +58,16 @@ class WeigthedGraph {
         console.log(`${node.label} is connected to`, edges);
       }
     }
+  };
+
+  hasCycle = () => {
+    const visited = new Set();
+    for (let node of Object.values(this.nodes)) {
+      if (!visited.has(node.label) && _hasCycle(node, null, visited))
+        return true;
+    }
+
+    return false;
   };
 }
 

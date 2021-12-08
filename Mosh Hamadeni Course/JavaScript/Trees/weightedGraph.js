@@ -2,25 +2,30 @@ class WeigthedGraph {
   Node = class {
     constructor(label) {
       this.label = label;
+      this.edges = [];
     }
-  };
+    Edge = class {
+      constructor(from, to, weight) {
+        this.from = from;
+        this.to = to;
+        this.weight = weight;
+      }
+    };
 
-  Edge = class {
-    constructor(from, to, weight) {
-      this.from = from;
-      this.to = to;
-      this.weight = weight;
+    addEdge(to, weight) {
+      this.edges.push(new this.Edge(this, to, weight));
+    }
+
+    getEdges() {
+      return this.edges;
     }
   };
 
   nodes = {};
-  adjacencyList = {};
 
   addNode = label => {
     if (!label) throw new Error('Label must have a value.');
-    const node = new this.Node(label);
-    !this.nodes[label] && (this.nodes[label] = node);
-    !this.adjacencyList[label] && (this.adjacencyList[label] = []);
+    !this.nodes[label] && (this.nodes[label] = new this.Node(label));
   };
 
   addEdge = (from, to, weight) => {
@@ -28,15 +33,15 @@ class WeigthedGraph {
     if (!this.nodes[to]) throw new Error('Node not found');
     if (typeof weight !== 'number') throw new Error('Invalid weight value');
 
-    this.adjacencyList[from].push(new this.Edge(from, to, weight));
-    this.adjacencyList[to].push(new this.Edge(to, from, weight));
+    this.nodes[from].addEdge(this.nodes[to], weight);
+    this.nodes[to].addEdge(this.nodes[from], weight);
   };
 
   print = () => {
-    for (let source in this.adjacencyList) {
-      let target = this.adjacencyList[source];
-      if (target.length) {
-        console.log(`${source} is connected to`, target);
+    for (let node of Object.values(this.nodes)) {
+      let edges = node.getEdges();
+      if (edges.length) {
+        console.log(`${node.label} is connected to`, edges);
       }
     }
   };

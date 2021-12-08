@@ -1,19 +1,20 @@
+class Edge {
+  constructor(from, to, weight) {
+    this.from = from;
+    this.to = to;
+    this.weight = weight;
+  }
+}
+
 class WeigthedGraph {
   Node = class {
     constructor(label) {
       this.label = label;
       this.edges = [];
     }
-    Edge = class {
-      constructor(from, to, weight) {
-        this.from = from;
-        this.to = to;
-        this.weight = weight;
-      }
-    };
 
     addEdge(to, weight) {
-      this.edges.push(new this.Edge(this, to, weight));
+      this.edges.push(new Edge(this, to, weight));
     }
 
     getEdges() {
@@ -47,10 +48,4 @@ class WeigthedGraph {
   };
 }
 
-const weightedGraph = new WeigthedGraph();
-weightedGraph.addNode('A');
-weightedGraph.addNode('B');
-weightedGraph.addNode('C');
-weightedGraph.addEdge('A', 'B', 3);
-weightedGraph.addEdge('A', 'C', 2);
-weightedGraph.print();
+module.exports = WeigthedGraph;

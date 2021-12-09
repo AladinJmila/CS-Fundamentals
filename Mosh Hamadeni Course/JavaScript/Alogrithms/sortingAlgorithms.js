@@ -84,6 +84,50 @@ function merge(left, right, result) {
   }
 }
 
-const array = [50, 20, 10, 40, 60];
+function quickSort(array, start = 0, end = array.length - 1) {
+  // return if array is empty or has a single item
+  if (start >= end) return;
 
-mergeSort2(array);
+  let boundary = partition(array, start, end);
+
+  quickSort(array, start, boundary - 1);
+  quickSort(array, boundary + 1, end);
+}
+
+function partition(array, start, end) {
+  let pivot = array[end];
+  let boundary = start - 1;
+
+  for (let i = start; i <= end; i++) {
+    if (array[i] <= pivot) {
+      // first thing we do is increment the value of boundary so there is no fear of
+      // falling out of range
+      boundary++;
+
+      let temp = array[i];
+      array[i] = array[boundary];
+      array[boundary] = temp;
+    }
+  }
+
+  return boundary;
+}
+
+function countingSort(array) {
+  const counts = [];
+  for (let item of array) {
+    counts[item] === undefined ? (counts[item] = 1) : counts[item]++;
+  }
+
+  let nextIndex = 0;
+
+  for (let i = 0; i < counts.length; i++) {
+    if (counts[i] !== undefined) {
+      for (let j = 0; j < counts[i]; j++) {
+        array[nextIndex++] = i;
+      }
+    }
+  }
+}
+
+const array = [5, 3, 2, 5, 4, 4, 5];

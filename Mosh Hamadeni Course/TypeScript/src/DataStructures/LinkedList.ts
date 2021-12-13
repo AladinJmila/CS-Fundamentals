@@ -41,6 +41,21 @@ export default class LinkedList {
     return this.indexOf(item) !== -1;
   }
 
+  public removeFirst(): void {
+    if (this.isEmpty()) throw new Error('NoSuchElementException');
+
+    if (this.first === this.last) {
+      this.first = this.last = null;
+      return;
+    }
+
+    if (this.first) {
+      const second = this.first.next;
+      this.first.next = null;
+      this.first = second;
+    }
+  }
+
   private isEmpty(): boolean {
     return !this.first;
   }

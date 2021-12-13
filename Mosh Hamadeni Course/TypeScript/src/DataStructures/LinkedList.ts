@@ -38,12 +38,7 @@ export default class LinkedList {
   }
 
   public contains(item: number): boolean {
-    let current = this.first;
-    while (current) {
-      if (item === current.value) return true;
-      current = current.next;
-    }
-    return false;
+    return this.indexOf(item) !== -1;
   }
 
   private isEmpty(): boolean {

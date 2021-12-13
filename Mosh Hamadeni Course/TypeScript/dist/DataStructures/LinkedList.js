@@ -1,21 +1,25 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 class MyNode {
-    // private next: MyNode;
-    constructor(value) {
+    constructor(value, next = null) {
         this.value = value;
+        this.next = next;
     }
 }
-export default class LinkedList {
-    // private first: MyNode;
-    // private last: MyNode;
+class LinkedList {
+    constructor() {
+        this.first = null;
+        this.last = null;
+    }
     addLast(item) {
         const node = new MyNode(item);
-        // console.log(node);
-        // console.log(this.first);
-        // console.log(this.last);
-        // if (this.first === null) {
-        //   this.first = node;
-        //   this.last = node;
-        // }
-        console.log('this.first');
+        if (!this.first) {
+            this.first = this.last = node;
+        }
+        if (this.last) {
+            this.last.next = node;
+            this.last = node;
+        }
     }
 }
+exports.default = LinkedList;

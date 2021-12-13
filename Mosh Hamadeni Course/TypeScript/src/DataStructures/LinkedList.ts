@@ -5,6 +5,7 @@ class MyNode {
 export default class LinkedList {
   private first: MyNode | null = null;
   private last: MyNode | null = null;
+  private size = 0;
 
   public addLast(item: number): void {
     const node = new MyNode(item);
@@ -15,6 +16,7 @@ export default class LinkedList {
       this.last.next = node;
       this.last = node;
     }
+    this.size++;
   }
 
   public addFirst(item: number): void {
@@ -24,6 +26,7 @@ export default class LinkedList {
       node.next = this.first;
       this.first = node;
     }
+    this.size++;
   }
 
   public indexOf(item: number): number {
@@ -46,6 +49,7 @@ export default class LinkedList {
 
     if (this.first === this.last) {
       this.first = this.last = null;
+      this.size--;
       return;
     }
 
@@ -54,6 +58,7 @@ export default class LinkedList {
       this.first.next = null;
       this.first = second;
     }
+    this.size--;
   }
 
   public removeLast(): void {
@@ -61,6 +66,7 @@ export default class LinkedList {
 
     if (this.first === this.last) {
       this.first = this.last = null;
+      this.size--;
       return;
     }
 
@@ -69,7 +75,11 @@ export default class LinkedList {
 
     this.last = previous;
     this.last && (this.last.next = null);
-    console.log(this.first);
+    this.size--;
+  }
+
+  public getSize(): number {
+    return this.size;
   }
 
   private getPrevious(node: MyNode): MyNode | null {

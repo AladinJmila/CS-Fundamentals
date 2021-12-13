@@ -9,7 +9,7 @@ export default class LinkedList {
   public addLast(item: number): void {
     const node = new MyNode(item);
 
-    if (!this.first) this.first = this.last = node;
+    if (this.isEmpty()) this.first = this.last = node;
 
     if (this.last) {
       this.last.next = node;
@@ -19,11 +19,25 @@ export default class LinkedList {
 
   public addFirst(item: number): void {
     const node = new MyNode(item);
-    if (!this.first) this.first = this.last = node;
+    if (this.isEmpty()) this.first = this.last = node;
     else {
       node.next = this.first;
       this.first = node;
     }
-    console.log(this.first);
+  }
+
+  public indexOf(item: number): number {
+    let counter = 0;
+    let current = this.first;
+    while (current) {
+      if (item === current.value) return counter;
+      current = current.next;
+      counter++;
+    }
+    return -1;
+  }
+
+  private isEmpty(): boolean {
+    return !this.first;
   }
 }

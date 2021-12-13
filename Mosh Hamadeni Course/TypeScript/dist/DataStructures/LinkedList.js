@@ -13,13 +13,24 @@ class LinkedList {
     }
     addLast(item) {
         const node = new MyNode(item);
-        if (!this.first) {
+        if (this.isEmpty())
             this.first = this.last = node;
-        }
         if (this.last) {
             this.last.next = node;
             this.last = node;
         }
+    }
+    addFirst(item) {
+        const node = new MyNode(item);
+        if (this.isEmpty())
+            this.first = this.last = node;
+        else {
+            node.next = this.first;
+            this.first = node;
+        }
+    }
+    isEmpty() {
+        return !this.first;
     }
 }
 exports.default = LinkedList;

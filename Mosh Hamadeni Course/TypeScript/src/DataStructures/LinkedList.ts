@@ -27,14 +27,23 @@ export default class LinkedList {
   }
 
   public indexOf(item: number): number {
-    let counter = 0;
+    let index = 0;
     let current = this.first;
     while (current) {
-      if (item === current.value) return counter;
+      if (item === current.value) return index;
       current = current.next;
-      counter++;
+      index++;
     }
     return -1;
+  }
+
+  public contains(item: number): boolean {
+    let current = this.first;
+    while (current) {
+      if (item === current.value) return true;
+      current = current.next;
+    }
+    return false;
   }
 
   private isEmpty(): boolean {

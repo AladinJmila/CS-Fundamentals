@@ -6,4 +6,4 @@ list.addLast(10);
 list.addLast(20);
 list.addLast(30);
 list.addFirst(5);
-console.log(list.indexOf(30));
+console.log(list.contains(5));

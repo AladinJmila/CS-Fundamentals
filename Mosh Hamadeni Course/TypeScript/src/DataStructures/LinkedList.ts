@@ -95,4 +95,17 @@ export default class LinkedList {
   private isEmpty(): boolean {
     return !this.first;
   }
+
+  public toArray(): number[] {
+    const array: number[] = [];
+
+    let current = this.first;
+
+    while (current) {
+      array.push(current.value);
+      current = current.next;
+    }
+
+    return array;
+  }
 }

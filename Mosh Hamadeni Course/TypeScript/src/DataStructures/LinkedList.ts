@@ -56,6 +56,32 @@ export default class LinkedList {
     }
   }
 
+  public removeLast(): void {
+    if (this.isEmpty()) throw new Error('NoSuchElementException');
+
+    if (this.first === this.last) {
+      this.first = this.last = null;
+      return;
+    }
+
+    let previous = null;
+    this.last && (previous = this.getPrevious(this.last));
+
+    this.last = previous;
+    this.last && (this.last.next = null);
+    console.log(this.first);
+  }
+
+  private getPrevious(node: MyNode): MyNode | null {
+    let current = this.first;
+    while (current) {
+      if (current.next === node) return current;
+      current = current.next;
+    }
+
+    return null;
+  }
+
   private isEmpty(): boolean {
     return !this.first;
   }

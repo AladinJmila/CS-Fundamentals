@@ -11,12 +11,13 @@ export default class LinkedList {
     const node = new MyNode(item);
 
     if (this.isEmpty()) this.first = this.last = node;
-
-    if (this.last) {
-      this.last.next = node;
-      this.last = node;
+    else {
+      if (this.last) {
+        this.last.next = node;
+        this.last = node;
+      }
+      this.size++;
     }
-    this.size++;
   }
 
   public addFirst(item: number): void {
@@ -100,12 +101,31 @@ export default class LinkedList {
     const array: number[] = [];
 
     let current = this.first;
-
     while (current) {
       array.push(current.value);
       current = current.next;
     }
 
     return array;
+  }
+
+  public reverse(): void {
+    let previous = this.first;
+    let current = this.first?.next;
+
+    console.log(this.first);
+
+    while (current) {
+      let next = current.next;
+      current.next = previous;
+      previous = current;
+      current = next;
+    }
+
+    this.last = this.first;
+    this.last && (this.last.next = null);
+    this.first = previous;
+
+    console.log(this.first);
   }
 }

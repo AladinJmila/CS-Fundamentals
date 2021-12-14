@@ -110,9 +110,20 @@ class LinkedList {
     this.first = previous;
     console.log(this.first);
   }
+  // I need two pointers, the first one will lead and at a certain point it will tag along the second one.
+  // The first one holds a torch to look ahead to the next one in line, and the second looks within and
+  // reports the value.
+  // Let's imagine that they are two sisters playing square jumping, the older one starts starts first:
+  // they need to find the value of the third square from the end.
+  // The older sister jumps in the first sqaure, then the second, then when it jumps into the third, it calls the
+  // younger sister to jump in the first square and now the space between them is 2 squares.
+  // From then on, they will jump together at the same time until the first reachs a dead end. At that point
+  // it will tell it's sister the report the number of the square she's standing at.
+
   getKthFromTheEnd(K) {
     let olderSisAt = this.first;
     let youngerSisAt;
+
     const spaceBetween = K - 1;
 
     if (!olderSisAt) throw new Error('EmptyListException');
@@ -121,13 +132,48 @@ class LinkedList {
       if (!olderSisAt.next) throw new Error('IndexOutOfRangeException');
       olderSisAt = olderSisAt.next;
     }
+
     youngerSisAt = this.first;
 
-    while (olderSisAt) {
-      if (!olderSisAt.next) return youngerSisAt.value;
+    while (olderSisAt !== this.last) {
       olderSisAt = olderSisAt.next;
       youngerSisAt = youngerSisAt.next;
     }
+    // the loop will break when the older sis reached the last square
+    // and that means the youger sis is at the right square
+
+    return youngerSisAt.value;
+  }
+
+  // both the sisters start at the first square, the the first sister moves forward and the second moves half
+  // the number of steps the first takes. If the first reached the end it asks it's sister to return its value
+
+  printMiddle() {
+    if (!this.fist) throw new Error('EmptyListException');
+
+    let olderSisAt = this.first;
+    let youngerSisAt = this.first;
+    let prevYounger;
+    let steps = 0;
+
+    while (olderSisAt !== this.last) {
+      olderSisAt = olderSisAt.next;
+      prevYounger = youngerSisAt;
+      steps++;
+      for (let i = 0; i < parseInt(steps % 2); i++) {
+        youngerSisAt = youngerSisAt.next;
+      }
+    }
+
+    if (!parseInt(steps % 2)) return youngerSisAt.value;
+
+    return [prevYounger.value, youngerSisAt.value];
   }
 }
+
+// Storify your algorithms with the simplest story possible, keep in mind that you will need to speak out your
+// coding process, so get in the habit of talking it outloud.
+// After coming up with the first story, see if you can tell it in a more efficient way reducing the tasks you
+// need to perform of do it smarter
+
 module.exports = LinkedList;

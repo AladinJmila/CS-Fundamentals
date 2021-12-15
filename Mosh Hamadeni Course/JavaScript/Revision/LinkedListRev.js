@@ -94,11 +94,9 @@ class LinkedList {
     return array;
   }
   reverse() {
-    var _a;
     let previous = this.first;
-    let current =
-      (_a = this.first) === null || _a === void 0 ? void 0 : _a.next;
-    console.log(this.first);
+    let current = this.first.next;
+
     while (current) {
       let next = current.next;
       current.next = previous;
@@ -106,10 +104,10 @@ class LinkedList {
       current = next;
     }
     this.last = this.first;
-    this.last && (this.last.next = null);
+    this.last.next = null;
     this.first = previous;
-    console.log(this.first);
   }
+
   // I need two pointers, the first one will lead and at a certain point it will tag along the second one.
   // The first one holds a torch to look ahead to the next one in line, and the second looks within and
   // reports the value.

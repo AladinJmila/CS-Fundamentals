@@ -63,18 +63,42 @@ class BinaryTree {
     return 1 + Math.max(babyMole(root.lefthChild), babyMole(root.rightChild));
   };
 
-  min = root => {
-    return this.MammaWarm(this.root);
+  min = () => {
+    return this.mammaRabbit(this.root);
   };
 
-  MammaWarm = root => {
+  mammaWarm = root => {
     if (this.isRootEnd(root)) return root.value;
 
-    const babyWarm = this.MammaWarm;
+    const babyWarm = this.mammaWarm;
     const one = babyWarm(root.leftChild);
     const two = babyWarm(root.rightChild);
 
     return Math.min(root.value, one, two);
+  };
+
+  mammaRabbit = root => {
+    if (this.isRootEnd(root)) return root.value;
+    const babyRabbit = this.mammaRabbit;
+    return babyRabbit(root.leftChild);
+  };
+
+  isEqual = tree => {
+    return this.mammaSnake(this.root, tree.root);
+  };
+
+  mammaSnake = (rootOne, rootTwo) => {
+    if (!rootOne && !rootTwo) return true;
+    if (!rootOne || !rootTwo) return false;
+    const babySnake = this.mammaSnake;
+
+    const compaBabeOne = babySnake(rootOne.leftChild, rootTwo.leftChild);
+    const compaBabeTwo = babySnake(rootOne.rightChild, rootTwo.rightChild);
+
+    let compaMum = false;
+    if (rootOne.value === rootTwo.value) compaMum = true;
+
+    return compaMum && compaBabeOne && compaBabeTwo;
   };
 
   isRootEnd = root => {

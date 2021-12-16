@@ -10,4 +10,4 @@ tree.insert(6);
 tree.insert(8);
 tree.insert(10);
 
-console.log(tree.find(0));
+console.log(tree.min());

@@ -179,6 +179,8 @@ class LinkedList {
 
     return false;
   }
+  // I need to return the height of a tree recurcively, so I need to start at the bottom
+  // calcuate the height of each node and pass the heigher value up. MamaMole
 }
 
 // Storify your algorithms with the simplest story possible, keep in mind that you will need to speak out your

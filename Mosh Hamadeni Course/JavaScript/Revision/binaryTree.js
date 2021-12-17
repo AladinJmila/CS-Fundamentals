@@ -153,6 +153,16 @@ class BinaryTree {
       this.counterRodent(root.rightChild)
     );
   };
+
+  countLeaves = () => {
+    console.log(this.counterSlug(this.root));
+  };
+
+  counterSlug = root => {
+    if (!root) return 0;
+    if (!root.leftChild && !root.rightChild) return 1;
+    return this.counterSlug(root.leftChild) + this.counterSlug(root.rightChild);
+  };
 }
 
 module.exports = BinaryTree;

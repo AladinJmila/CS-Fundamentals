@@ -57,7 +57,7 @@ class BinaryTree {
 
   mamaMole = root => {
     if (!root) return -1;
-    if (this.isRootEnd(root)) return 0;
+    if (this.hasNoChildren(root)) return 0;
     const babyMole = this.mamaMole;
 
     return 1 + Math.max(babyMole(root.lefthChild), babyMole(root.rightChild));
@@ -68,7 +68,7 @@ class BinaryTree {
   };
 
   mammaWarm = root => {
-    if (this.isRootEnd(root)) return root.value;
+    if (this.hasNoChildren(root)) return root.value;
 
     const babyWarm = this.mammaWarm;
     const one = babyWarm(root.leftChild);
@@ -78,7 +78,7 @@ class BinaryTree {
   };
 
   mammaRabbit = root => {
-    if (this.isRootEnd(root)) return root.value;
+    if (this.hasNoChildren(root)) return root.value;
     const babyRabbit = this.mammaRabbit;
     return babyRabbit(root.leftChild);
   };
@@ -101,7 +101,27 @@ class BinaryTree {
     return compaMum && compaBabeOne && compaBabeTwo;
   };
 
-  isRootEnd = root => {
+  isValid = () => {
+    return this.mammaFox(
+      this.root,
+      Number.NEGATIVE_INFINITY,
+      Number.POSITIVE_INFINITY
+    );
+  };
+
+  mammaFox = (root, min, max) => {
+    const babyFox = this.mammaFox;
+    if (!root) return true;
+
+    if (root.value < min || root.value > max) return false;
+
+    return (
+      babyFox(root.leftChild, min, root.value - 1) &&
+      babyFox(root.rightChild, root.value + 1, max)
+    );
+  };
+
+  hasNoChildren = root => {
     return !root.leftChild && !root.rightChild;
   };
 }

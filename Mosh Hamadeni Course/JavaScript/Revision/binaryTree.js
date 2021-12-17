@@ -121,8 +121,37 @@ class BinaryTree {
     );
   };
 
+  nodeAtKthDistance = K => {
+    const array = [];
+    this.digger(this.root, K, array);
+    console.log(array);
+  };
+
+  digger = (root, distance, array) => {
+    if (!root) return;
+    if (distance === 0) {
+      array.push(root.value);
+      return;
+    }
+    this.digger(root.leftChild, distance - 1, array);
+    this.digger(root.rightChild, distance - 1, array);
+  };
+
   hasNoChildren = root => {
     return !root.leftChild && !root.rightChild;
+  };
+
+  getSize = () => {
+    console.log(this.counterRodent(this.root));
+  };
+
+  counterRodent = root => {
+    if (!root) return 0;
+    return (
+      1 +
+      this.counterRodent(root.leftChild) +
+      this.counterRodent(root.rightChild)
+    );
   };
 }
 

@@ -8,8 +8,6 @@ tree.insert(9);
 tree.insert(1);
 tree.insert(6);
 tree.insert(8);
-tree.insert(10);
+// tree.insert(10);
 
-tree.root.rightChild.value = 3;
-
-console.log(tree.isValid());
+tree.getSize();

@@ -128,4 +128,35 @@ export default class LinkedList {
 
     console.log(this.first);
   }
+
+  // I need two pointers, the first one will lead and at a certain point it will tag along the second one.
+  // The first one holds a torch to look ahead to the next one in line, and the second looks within and 
+  // reports the value.
+  // Let's imagine that they are two sisters playing square jumping, the older one starts starts first:
+  // they need to find the value of the third square from the end.
+  // The older sister jumps in the first sqaure, then the second, then when it jumps into the third, it calls the 
+  // younger sister to jump in the first square and now the space between them is 2 squares.
+  // From then on, they will jump together at the same time until the first reachs a dead end. At that point
+  // it will tell it's sister the report the number of the square she's standing at.
+
+  // public getKthFromTheEnd(K: number): number {
+  //   let olderSis = this.first
+  //   let youngerSis: MyNode | null
+  //   const spaceBetween = K - 1 
+    
+  //   for (let i = 0; i < spaceBetween; i++) {
+  //     olderSis && (olderSis = olderSis.next)
+  //   }
+
+  //   youngerSis = this.first
+
+  //   while (olderSis) {
+  //     if (!olderSis.next) {} return youngerSis.value
+  //     olderSis = olderSis.next
+  //   }
+
+  // }
+
+  // Storify your algorithms with the simplest story possible, keep in mind that you will need to speak out your
+  // coding process, so get in the habit of talking it outloud
 }

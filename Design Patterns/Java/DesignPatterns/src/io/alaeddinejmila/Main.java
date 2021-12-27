@@ -1,23 +1,20 @@
 package io.alaeddinejmila;
 
 
-import io.alaeddinejmila.iterator.BrowseHistory;
-import io.alaeddinejmila.iterator.Iterator;
+import io.alaeddinejmila.strategy.BlackAndWhiteFilter;
+import io.alaeddinejmila.strategy.ImageStorage;
+import io.alaeddinejmila.strategy.JpegCompressor;
+import io.alaeddinejmila.strategy.PngCompressor;
+
 
 public class Main {
 
     public static void main(String[] args) {
-        var history = new BrowseHistory();
-        history.push("a");
-        history.push("b");
-        history.push("c");
-
-        Iterator iterator = history.createIterator();
-        while (iterator.hasNext()) {
-            var url = iterator.current();
-            System.out.println(url);
-            iterator.next();
-        }
+        var imageStorage = new ImageStorage();
+        imageStorage.store("a",
+                new JpegCompressor(), new BlackAndWhiteFilter());
+        imageStorage.store("a",
+                new PngCompressor(), new BlackAndWhiteFilter());
     }
 
 

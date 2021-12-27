@@ -18,7 +18,31 @@ public class BrowseHistory {
         return lastUrl;
     }
 
-    public List<String> getUrls() {
-        return urls;
+    public Iterator<String> createIterator() {
+        return new ListIterator(this);
+    }
+
+    public class ListIterator implements Iterator<String> {
+        private BrowseHistory history;
+        private int index;
+
+        public ListIterator(BrowseHistory history) {
+            this.history = history;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return (index < history.urls.size());
+        }
+
+        @Override
+        public String current() {
+            return history.urls.get(index);
+        }
+
+        @Override
+        public void next() {
+            index++;
+        }
     }
 }
